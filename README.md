@@ -1,7 +1,7 @@
 # Contribution Graph
 
 ```md
-https://contribution-graph-alpha.vercel.app/api/graph?username=RetrivedMods
+https://contribution-graph-lfdx.vercel.app/api/graph?username=RetrivedMods
 ```
 
 ## Deploy
@@ -41,5 +41,5 @@ Import the repo on vercel.com
 | `font` | `'Segoe UI', Ubuntu, Sans-Serif` | URL of fonts |
 
 ```md
-https://contribution-graph-alpha.vercel.app/api/graph?username=RetrivedMods&bg_color=0d1117&line=58a6ff&area_color=a0c4ff&hide_border=true&custom_title=Contribution%20Graph
+https://contribution-graph-lfdx.vercel.app/api/graph?username=RetrivedMods&bg_color=0d1117&line=58a6ff&area_color=a0c4ff&hide_border=true&custom_title=Contribution%20Graph
 ```
