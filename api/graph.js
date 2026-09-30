@@ -45,6 +45,7 @@ module.exports = async (req, res) => {
   const range = q.range === 'year' ? 'year' : 'month'
   const targetYear = q.year ? parseInt(q.year, 10) : now.getUTCFullYear()
   const targetMonth = q.month ? parseInt(q.month, 10) : now.getUTCMonth() + 1
+  const isCurrentMonth = targetYear === now.getUTCFullYear() && targetMonth === now.getUTCMonth() + 1
 
   const defaultTitle = range === 'year'
     ? `${username}'s contribution graph`
@@ -80,7 +81,10 @@ module.exports = async (req, res) => {
     animate: toBool(q.animate, false),
     strokeWidth: q.stroke_width ? parseFloat(q.stroke_width) : 2.2,
     yTicks: q.y_ticks ? parseInt(q.y_ticks, 10) : 4,
-    font: q.font ? decodeURIComponent(q.font) : "'Segoe UI', Ubuntu, Sans-Serif"
+    font: q.font ? decodeURIComponent(q.font) : "'Segoe UI', Ubuntu, Sans-Serif",
+    today: range === 'month' && isCurrentMonth
+      ? `${targetYear}-${String(targetMonth).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`
+      : null
   }
 
   const cacheKey = req.url
@@ -93,7 +97,6 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const isCurrentMonth = targetYear === now.getUTCFullYear() && targetMonth === now.getUTCMonth() + 1
     const endDay = isCurrentMonth ? now.getUTCDate() : daysInMonth(targetYear, targetMonth)
     const fetchTo = range === 'month'
       ? `${targetYear}-${String(targetMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
