@@ -22,11 +22,10 @@ function daysInMonth(year, month) {
   return new Date(Date.UTC(year, month, 0)).getUTCDate()
 }
 
-function buildMonthSeries(data, year, month) {
-  const total = daysInMonth(year, month)
+function buildMonthSeries(data, year, month, endDay = daysInMonth(year, month)) {
   const map = new Map(data.map(d => [d.date, d.count]))
   const series = []
-  for (let day = 1; day <= total; day++) {
+  for (let day = 1; day <= endDay; day++) {
     const date = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
     series.push({ date, count: map.get(date) || 0 })
   }
@@ -95,14 +94,15 @@ module.exports = async (req, res) => {
 
   try {
     const isCurrentMonth = targetYear === now.getUTCFullYear() && targetMonth === now.getUTCMonth() + 1
-    const fetchTo = range === 'month' && !isCurrentMonth
-      ? new Date(Date.UTC(targetYear, targetMonth, 0)).toISOString().slice(0, 10)
+    const endDay = isCurrentMonth ? now.getUTCDate() : daysInMonth(targetYear, targetMonth)
+    const fetchTo = range === 'month'
+      ? `${targetYear}-${String(targetMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
       : undefined
 
     const raw = await grabContributions(username, fetchTo)
     if (!raw.length) throw new Error('no contribution data found, private profile or bad username?')
 
-    const data = range === 'year' ? raw : buildMonthSeries(raw, targetYear, targetMonth)
+    const data = range === 'year' ? raw : buildMonthSeries(raw, targetYear, targetMonth, endDay)
 
     const svg = renderGraph(data, opts)
     cache.set(cacheKey, { svg, time: Date.now() })
