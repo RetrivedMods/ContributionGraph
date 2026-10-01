@@ -97,7 +97,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const endDay = isCurrentMonth ? now.getUTCDate() : daysInMonth(targetYear, targetMonth)
+    const endDay = daysInMonth(targetYear, targetMonth)
     const fetchTo = range === 'month'
       ? `${targetYear}-${String(targetMonth).padStart(2, '0')}-${String(endDay).padStart(2, '0')}`
       : undefined
