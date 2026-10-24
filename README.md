@@ -2,7 +2,7 @@
 
 ## Playground
 
-Use the [Contribution Graph Playground](https://contributiongraph4readme.vercel.app/) to customize your graph with a live preview. Adjust the colors, size, date range, and display options, then copy the generated image URL or Markdown embed.
+Use the [Contribution Graph Playground](https://contribution-graph-lfdx.vercel.app/) to customize your graph with a live preview. Adjust the colors, size, date range, and display options, then copy the generated image URL or Markdown embed.
 
 ```md
 https://contribution-graph-lfdx.vercel.app/api/graph?username=RetrivedMods
