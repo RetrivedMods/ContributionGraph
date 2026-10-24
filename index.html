@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1117">
+  <title>Contribution Graph Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Contribution Graph</div>
+      <h1>Make it yours.</h1>
+      <p>Customize your GitHub profile with a custom contribution graph.</p>
+    </header>
+
+    <div class="layout">
+      <section class="panel controls" aria-labelledby="controls-title">
+        <h2 id="controls-title">Customize</h2>
+
+        <div class="field">
+          <label for="username">GitHub username</label>
+          <input id="username" type="text" value="RetrivedMods" autocomplete="off" spellcheck="false">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="range">Date range</label>
+            <select id="range">
+              <option value="month">This month</option>
+              <option value="year">Last 365 days</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="width">Width</label>
+            <input id="width" type="number" min="300" max="1600" value="800">
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Colors</span>
+          <div class="color-row">
+            <label class="hint" for="line-color">Line</label>
+            <input id="line-color" type="color" value="#58a6ff" aria-label="Line color">
+            <label class="hint" for="area-color">Area</label>
+            <input id="area-color" type="color" value="#3b82f7" aria-label="Area color">
+            <label class="hint" for="point-color">Point</label>
+            <input id="point-color" type="color" value="#93c5fd" aria-label="Point color">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="background">Background</label>
+          <select id="background">
+            <option value="transparent">Transparent</option>
+            <option value="0d1117">GitHub dark</option>
+            <option value="ffffff">White</option>
+            <option value="161b22">Dark gray</option>
+          </select>
+        </div>
+
+        <details open>
+          <summary>Display options</summary>
+          <div class="field">
+            <label for="custom-title">Custom title <span class="hint">(optional)</span></label>
+            <input id="custom-title" type="text" placeholder="Defaults to your activity title">
+          </div>
+          <div class="toggles">
+            <label class="toggle"><input id="hide-title" type="checkbox" checked> Hide title</label>
+            <label class="toggle"><input id="hide-border" type="checkbox" checked> Hide border</label>
+            <label class="toggle"><input id="grid" type="checkbox" checked> Show grid</label>
+            <label class="toggle"><input id="peak" type="checkbox" checked> Highlight peak</label>
+            <label class="toggle"><input id="points" type="checkbox" checked> Show points</label>
+            <label class="toggle"><input id="glow" type="checkbox"> Line glow</label>
+            <label class="toggle"><input id="animate" type="checkbox" checked> Animate line</label>
+            <label class="toggle"><input id="area" type="checkbox" checked> Fill under line</label>
+            <label class="toggle"><input id="x-axis" type="checkbox" checked> X axis</label>
+            <label class="toggle"><input id="y-axis" type="checkbox" checked> Y axis</label>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="y-ticks">Y-axis ticks</label>
+              <input id="y-ticks" type="number" min="2" max="10" value="5">
+            </div>
+            <div class="field">
+              <label for="height">Height</label>
+              <input id="height" type="number" min="150" max="800" value="300">
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <div class="results">
+        <section class="panel preview" aria-labelledby="preview-title">
+          <div class="section-heading">
+            <h2 id="preview-title">Graph preview</h2>
+          </div>
+          <div class="image-wrap">
+            <img id="preview-image" alt="Contribution graph preview">
+          </div>
+          <p class="hint">The preview loads contribution data from the graph API. Updates may take a moment.</p>
+        </section>
+
+        <section class="panel output" aria-labelledby="output-title">
+          <h2 id="output-title">Your graph URL</h2>
+          <div class="field">
+            <label for="graph-url">Image URL</label>
+            <textarea id="graph-url" readonly spellcheck="false"></textarea>
+          </div>
+          <div class="field">
+            <label for="markdown">Markdown embed</label>
+            <textarea id="markdown" readonly spellcheck="false"></textarea>
+          </div>
+          <div class="actions">
+            <button class="button primary" id="copy-url" type="button">Copy URL</button>
+            <button class="button" id="copy-markdown" type="button">Copy Markdown</button>
+            <button class="button" id="open-graph" type="button">Open graph</button>
+          </div>
+          <p id="status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
